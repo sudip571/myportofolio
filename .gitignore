@@ -1,0 +1,15 @@
+# visual studio file
+*.user
+*.pyproj
+*.sln
+
+# sensitive folders
+instance/
+migrations/
+
+# Byte-compiled/optimized/DLL files
+__pycache__
+
+# other folders
+env/
+obj/

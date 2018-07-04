@@ -1,0 +1,117 @@
+{% macro show_contact(form,about) %}
+
+<section class="text-center section-padding contact-wrap" id="contact">
+    <!-- To Top Button -->
+    <a href="#top" class="up-btn"><i class="fa fa-chevron-up"></i></a>
+    <div class="container">
+        <!-- Headline -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="arrow">Leave <span>me</span> a message</h1>
+            </div>
+        </div>
+        <div class="row contact-details">
+            <!-- Adress Box -->
+            <div class="col-md-4">
+                <div class="dark-box box-hover">
+                    <h2><i class="fa fa-map-marker"></i><span>Address</span></h2>
+                    <p>{{about.address}}</p>
+                </div>
+            </div>
+            <!-- Phone Number Box -->
+            <div class="col-md-4">
+                <div class="dark-box box-hover">
+                    <h2><i class="fa fa-mobile"></i><span>Phone</span></h2>
+                    <p>{{about.mobileno}}</p>
+                </div>
+            </div>
+            <!-- E-Mail Box -->
+            <div class="col-md-4">
+                <div class="dark-box box-hover">
+                    <h2><i class="fa fa-paper-plane"></i><span>Email</span></h2>
+                    <p><a href="index.html#">{{about.email}}</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">           
+          
+            <!-- Contact Form -->
+            <div class="col-md-6 contact">
+                <div id="msg"></div>
+                <!--<form role="form" method="post" action="">-->
+                <form role="form">
+                    {{form.hidden_tag() }}
+                    <!-- Name -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- E-Mail -->
+                            <div class="form-group">
+                                {{form.email.label}} {{form.email(class_="form-control",placeholder_=" Your Email address")}}
+                                {% for error in form.email.errors  %}
+                                <span style="color:orangered;">{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                {{form.email_subject.label}} {{form.email_subject(class_="form-control",placeholder_="Email Subject")}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message Area -->
+                    <div class="form-group">
+                        {{form.email_body.label}} {{form.email_body(class_="form-control",placeholder_=" your message",style_="height:150px;")}}
+                    </div>
+                    <!-- Subtmit Button -->
+                    <input type="submit" value="Send" class="btn btn-send" />
+                </form>
+            </div>
+        </div>
+        <br>
+
+    </div>
+</section>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>
+    
+    $(document).ready(function() {
+        $('form').submit(function (e) {
+              
+            var url = "{{ url_for('contact.add_email') }}"; // send the form data here.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('form').serialize(), // serializes the form's elements.
+                success: function (data) {
+                    dataInJson = JSON.parse(data)
+                    if (dataInJson.status == 'success') {
+                        $('#msg').css({ "color": "green", "background-color": "#B4D8E7", "height": "10 px", "width": "100%"})
+                        $('#msg').html(dataInJson.message).fadeIn('slow');
+                        $('#msg').delay(5000).fadeOut('slow');
+                        $("#email_subject").val('');
+                        $("#email").val('');
+                        $("#email_body").val('');
+                    }
+
+                    if (dataInJson.status == 'failure') {
+                        $('#msg').css({ "color": "red", "background-color": "#CED2D5  ", "height": "200 px", "width": "100%" })
+                        $('#msg').html(dataInJson.message).fadeIn('slow');
+                        $('#msg').delay(5000).fadeOut('slow');
+                    }
+
+                },
+                error: function (data) {
+                    
+                }
+            });
+           
+            e.preventDefault(); // block the traditional submission of the form.
+        });
+        
+    });
+</script>
+
+
+{% endmacro %}

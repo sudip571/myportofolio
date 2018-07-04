@@ -1,0 +1,72 @@
+﻿{% macro show_portofolio(portofolio) %}
+
+<section class="text-center section-padding" id="blog">
+    <div class="container">
+        <!-- Headline -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="arrow">Projects Involved</h1>
+            </div>
+        </div><br><br>
+
+        <!-- Blog Slider -->
+        <div class="row">
+            <div id="blogSlider">
+                <ul class="slides">
+                    {% if portofolio %}
+                    {% for i in range(0,portofolio|length,3) %}
+                    <li>
+                        {% if portofolio|length >=i %}
+                        <!-- Blog Entry 1 -->
+                        <div class="col-md-4 wp4">
+                            <div class="overlay-effect effects clearfix">
+                                <div class="img">
+                                    <img src="{{ "/static/projectimage/"+portofolio[i].project_image_path }}" class="grayscale" alt="Blog Item"><!-- Blog Image -->
+                                </div>
+                            </div>
+                            <br>
+                            <h2>{{portofolio[i].project_title}}</h2><!-- Headline -->
+                            <p>{{portofolio[i].project_description}}</p><!-- Description-->
+                        </div>
+                        {% endif %}
+
+                        {% if portofolio|length >(i+1) %}
+                        <!-- Blog Entry 2 -->
+                        <div class="col-md-4 wp4 delay-05s">
+                            <div class="overlay-effect effects clearfix">
+                                <div class="img">
+                                    <img src="{{ "/static/projectimage/"+portofolio[i+1].project_image_path }}" class="grayscale" alt="Blog Item"><!-- Blog Image -->
+                                </div>
+                            </div>
+                            <br>
+                            <h2>{{portofolio[i+1].project_title}}</h2><!-- Headline -->
+                            <p>{{portofolio[i+1].project_description}}</p><!-- Description -->
+                        </div>
+                        {% endif %}
+
+                        {% if portofolio|length >(i+2) %}
+                        <!-- Blog Entry 3 -->
+                        <div class="col-md-4 wp4 delay-1s">
+                            <div class="overlay-effect effects clearfix">
+                                <div class="img">
+                                    <img src="{{ "/static/projectimage/"+portofolio[i+2].project_image_path }}" class="grayscale" alt="Blog Item"><!-- Blog Image -->
+                                </div>
+                            </div>
+                            <br>
+                            <h2>{{portofolio[i+2].project_title}}</h2><!-- Headline -->
+                            <p>{{portofolio[i+2].project_description}}</p><!-- Description-->
+                        </div>
+                        {% endif %}
+                    </li>
+
+                    {% endfor %}
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endmacro %}
+

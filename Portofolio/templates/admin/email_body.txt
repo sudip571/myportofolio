@@ -1,0 +1,9 @@
+Hi,
+
+Note:The Email Address of a message sender is {{message_sender_email}}
+
+{{message}}
+
+Regards,
+
+SRB-Portofolio

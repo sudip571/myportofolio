@@ -1,0 +1,55 @@
+﻿{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Emails{% endblock %}
+{% block body %}
+<div class="content-section">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <br />
+                {{ utils.flashed_messages() }}
+                <br />
+                <h1 style="text-align:center;">Emails</h1>
+                {% if emails %}
+                <hr class="intro-divider">
+                <div class="center">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="15%"> Subject </th>
+                                <th width="15%"> From</th>
+                                <th width="15%"> Message </th>
+                                <th width="15%"> Delete </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in emails %}
+                            <tr>
+                                <td> {{ item.email_subject }} </td>
+                                <td> {{ item.email }} </td>
+                                <td> {{ item.email_body }} </td>
+
+                               
+                                <td>
+                                    <a href="{{ url_for('contact.delete_email', id=item.id) }}">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center">
+                    {% else %}
+                    <div style="text-align: center">
+                        <h3> You have got no Email </h3>
+                        <hr class="intro-divider">
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

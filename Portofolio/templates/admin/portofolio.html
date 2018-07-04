@@ -1,0 +1,67 @@
+﻿{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Info{% endblock %}
+{% block body %}
+<div class="content-section">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <br />
+                {{ utils.flashed_messages() }}
+                <br />
+                <h1 style="text-align:center;">Portofolio</h1>
+                {% if myporto %}
+                <hr class="intro-divider">
+                <div class="center">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="15%"> Project Name </th>
+                                <th width="15%"> Project Description</th>
+                                <th width="15%"> Technology Used</th>
+                                <th width="15%"> Project Image</th>                                
+                                <th width="15%"> Edit </th>
+                                <th width="15%"> Delete </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in myporto %}
+                            <tr>
+                                <td> {{ item.project_title }} </td>
+                                <td> {{ item.project_description }} </td>
+                                <td> {{ item.technology_used }} </td>
+                                <td> <img src="{{ "/static/projectimage/"+item.project_image_path }}" alt="Project Image" style="width:100px;height:100px;"></td>                             
+
+
+                                <td>
+                                    <a href="{{ url_for('porto.edit_portofo', id=item.id) }}">
+                                        <i class="fa fa-pencil"></i> Edit
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('porto.delete_portofo', id=item.id) }}">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center">
+                    {% else %}
+                    <div style="text-align: center">
+                        <h3> No Portofolio  has been added. </h3>
+                        <hr class="intro-divider">
+                        {% endif %}
+                        <a href="{{ url_for('porto.add_portofo') }}" class="btn btn-default btn-lg">
+                            <i class="fa fa-plus"></i>
+                            Add Portofolio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endblock %}
