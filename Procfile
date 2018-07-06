@@ -1,1 +1,1 @@
-web: gunicorn --chdir Portofolio __init__:app
+web: python runserver.py
