@@ -11,6 +11,7 @@ app = create_app(config_name)
  
 if __name__ == '__main__':
     print(app.config['EMAIL_RECEIVER'])
-    print(app.config['TOP_LEVEL_DIR'])    
+    print(app.config['TOP_LEVEL_DIR'])
+     
     app.run()
     
