@@ -4,7 +4,7 @@
 *.sln
 
 # sensitive folders
-instance/
+#instance/
 migrations/
 
 # Byte-compiled/optimized/DLL files
