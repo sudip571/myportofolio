@@ -17,7 +17,7 @@ def dashboard():
 def login():
 
     form = LoginForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit():        
         result=user.query.filter_by(username=form.username.data).first()
         if result is not None and result.verify_password(form.password.data):
             login_user(result)                    
