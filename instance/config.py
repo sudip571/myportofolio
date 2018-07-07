@@ -14,8 +14,6 @@ else:
     # for production
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:aits567$@localhost/merodb'
-
 # Uploads
 UPLOADS_DEFAULT_DEST= TOP_LEVEL_DIR +'/Portofolio/static/projectimage/'
 
