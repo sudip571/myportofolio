@@ -5,6 +5,7 @@
 
 # sensitive folders
 #instance/
+#migrations
 
 
 # Byte-compiled/optimized/DLL files
@@ -13,3 +14,5 @@ __pycache__
 # other folders
 env/
 obj/
+#other files
+Procfile
